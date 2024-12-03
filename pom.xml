@@ -13,7 +13,7 @@
     <modules>
       <module>database-service</module>
         <module>api-gateway</module>
-<!--        <module>user-service</module>-->
+        <module>user-service</module>
 <!--        <module>skill-service</module>-->
 <!--        <module>api-gateway</module>-->
         <!-- Añade más módulos aquí en el futuro -->
