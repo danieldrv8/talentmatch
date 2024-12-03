@@ -7,7 +7,9 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - database-service
+      - user-service
+      - skill-service
+      - mysql-container
     networks:
       - app-network
 
@@ -18,7 +20,7 @@ services:
     ports:
       - "8082:8082"
     depends_on:
-      - database-service
+      - mysql-container
     networks:
       - app-network
 
@@ -28,21 +30,6 @@ services:
       dockerfile: ./skill-service/Dockerfile
     ports:
       - "8083:8083"
-    depends_on:
-      - database-service
-    networks:
-      - app-network
-
-  database-service:
-    build:
-      context: .
-      dockerfile: ./database-service/Dockerfile
-    ports:
-      - "8081:8081"
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-container:3306/talentmatch
-      - SPRING_DATASOURCE_USERNAME=talentmatch
-      - SPRING_DATASOURCE_PASSWORD=talentmatch
     depends_on:
       - mysql-container
     networks:
