@@ -2,7 +2,7 @@
   <artifact type="jar" name="talentmatch:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/talentmatch_jar</output-path>
     <root id="archive" name="talentmatch.jar">
-      <element id="module-output" name="database-service" />
+      <element id="module-output" name="candidate-skill-service" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-jdbc/3.3.5/spring-boot-starter-jdbc-3.3.5.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/micrometer/micrometer-observation/1.13.6/micrometer-observation-1.13.6.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar" path-in-jar="/" />
