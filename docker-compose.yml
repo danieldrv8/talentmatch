@@ -54,7 +54,7 @@ services:
       MYSQL_ROOT_PASSWORD: talentmatch
       MYSQL_DATABASE: talentmatch
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql

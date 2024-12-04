@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
-        <module name="candidate-service" />
         <module name="user-service" />
-        <module name="skill-service" />
         <module name="candidate-skill-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="candidate-service" target="17" />
+      <module name="skill-service" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

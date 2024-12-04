@@ -12,8 +12,6 @@
         <module>candidate-skill-service</module>
         <module>api-gateway</module>
         <module>user-service</module>
-        <module>skill-service</module>
-        <module>candidate-service</module>
     </modules>
 
     <description>Parent project for TalentMatch</description>
