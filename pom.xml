@@ -9,7 +9,7 @@
 
     <name>TalentMatch Parent</name>
     <modules>
-        <module>candidate-skill-service</module>
+        <module>candidateSkill-service</module>
         <module>api-gateway</module>
         <module>user-service</module>
     </modules>

@@ -5,10 +5,10 @@ WORKDIR /app
 
 # Copiar el POM padre y los módulos al contexto del contenedor
 COPY ./pom.xml ./pom.xml
-COPY ./candidate-skill-service ./candidate-skill-service
+COPY ./candidateSkill-service ./candidateSkill-service
 
 # Ir al directorio del módulo e instalar dependencias
-WORKDIR /app/candidate-skill-service
+WORKDIR /app/candidateSkill-service
 RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline -B
 
 # Construir el JAR del módulo
@@ -20,7 +20,7 @@ FROM eclipse-temurin:17-jre
 WORKDIR /app
 
 # Copiar el JAR compilado desde la etapa anterior
-COPY --from=builder /app/candidate-skill-service/target/candidate-skill-service-1.0-SNAPSHOT.jar app.jar
+COPY --from=builder /app/candidateSkill-service/target/candidateSkill-service-1.0-SNAPSHOT.jar app.jar
 
 EXPOSE 8081
 

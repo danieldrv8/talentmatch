@@ -1,7 +1,9 @@
 services:
 
   api-gateway:
-    image: danieldrv/talentmatch-api-gateway:latest
+    build:
+      context: .
+      dockerfile: ./api-gateway/Dockerfile
     ports:
       - "8080:8080"
     depends_on:
