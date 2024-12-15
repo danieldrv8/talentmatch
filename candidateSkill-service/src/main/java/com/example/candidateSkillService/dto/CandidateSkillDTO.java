@@ -1,19 +1,35 @@
-package com.example.database_service.dto;
+package com.example.candidateSkillService.dto;
 
-public class SkillDTO {
-
+public class CandidateSkillDTO {
     private Long id;
-    private String skillName;
+    private Long candidateId;
+    private Long skillId;
     private int yearsOfExperience;
     private String proficiency;
     private int lastYearUsed;
 
-    public String getSkillName() {
-        return skillName;
+    public Long getId() {
+        return id;
     }
 
-    public void setSkillName(String skillName) {
-        this.skillName = skillName;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getCandidateId() {
+        return candidateId;
+    }
+
+    public void setCandidateId(Long candidateId) {
+        this.candidateId = candidateId;
+    }
+
+    public Long getSkillId() {
+        return skillId;
+    }
+
+    public void setSkillId(Long skillId) {
+        this.skillId = skillId;
     }
 
     public int getYearsOfExperience() {
@@ -38,9 +54,5 @@ public class SkillDTO {
 
     public void setLastYearUsed(int lastYearUsed) {
         this.lastYearUsed = lastYearUsed;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }

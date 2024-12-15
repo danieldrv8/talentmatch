@@ -20,7 +20,7 @@ FROM eclipse-temurin:17-jre
 WORKDIR /app
 
 # Copiar el JAR compilado desde la etapa anterior
-COPY --from=builder /app/candidateSkill-service/target/candidateSkill-service-1.0-SNAPSHOT.jar app.jar
+COPY --from=builder /app/candidateSkill-service/target/candidate-skill-service-1.0-SNAPSHOT.jar app.jar
 
 EXPOSE 8081
 

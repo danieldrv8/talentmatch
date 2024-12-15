@@ -1,21 +1,14 @@
-package com.example.database_service.dto;
+package com.example.candidateSkillService.dto;
 
+import java.util.List;
 import java.util.Set;
 
-public class CandidateResponseDTO {
+public class CandidateDTO {
     private Long id;
     private String candidateName;
     private String email;
     private String dasId;
-    private Set<SkillDTO> skills; // Or just skillIds depending on needs
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private List<CandidateSkillDTO> candidateSkills;
 
     public String getCandidateName() {
         return candidateName;
@@ -41,12 +34,19 @@ public class CandidateResponseDTO {
         this.dasId = dasId;
     }
 
-    public Set<SkillDTO> getSkills() {
-        return skills;
+    public Long getId() {
+        return id;
     }
 
-    public void setSkills(Set<SkillDTO> skills) {
-        this.skills = skills;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<CandidateSkillDTO> getSkills() {
+        return candidateSkills;
+    }
+
+    public void setSkills(List<CandidateSkillDTO> skills) {
+        this.candidateSkills = skills;
     }
 }
-

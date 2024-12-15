@@ -1,7 +1,7 @@
-package com.example.database_service.controller;
+package com.example.candidateSkillService.controller;
 
-import com.example.database_service.entity.Skill;
-import com.example.database_service.service.SkillService;
+import com.example.candidateSkillService.dto.SkillDTO;
+import com.example.candidateSkillService.service.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class SkillController {
 
     @GetMapping
     public ResponseEntity<Map<String, Object>> getAllSkills() {
-        List<Skill> skills = skillService.findAll();
+        List<SkillDTO> skills = skillService.getAllSkills();
         Map<String, Object> response = new HashMap<>();
         response.put("message", "All skills found");
         response.put("skills", skills);
@@ -28,34 +28,34 @@ public class SkillController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> getSkillById(@PathVariable Long id) {
-        Skill skill = skillService.findById(id);
+        SkillDTO skillDTO = skillService.getSkillById(id);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Skill found");
-        response.put("skill", skill);
+        response.put("skill", skillDTO);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> createSkill(@RequestBody Skill skill) {
-        Skill newSkill = skillService.save(skill);
+    public ResponseEntity<Map<String, Object>> createSkill(@RequestBody SkillDTO skillDTO) {
+        skillService.createSkill(skillDTO);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Skill created");
-        response.put("skill", newSkill);
+        response.put("skill", skillDTO);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> updateSkill(@PathVariable Long id, @RequestBody Skill skill) {
-        Skill updatedSkill = skillService.update(id, skill);
+    public ResponseEntity<Map<String, Object>> updateSkill(@PathVariable Long id, @RequestBody SkillDTO skillDTO) {
+        skillService.updateSkill(id, skillDTO);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Skill updated");
-        response.put("skill", updatedSkill);
+        response.put("skill", skillDTO);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> deleteSkill(@PathVariable Long id) {
-        skillService.deleteById(id);
+        skillService.deleteSkill(id);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Skill deleted");
         return ResponseEntity.ok(response);

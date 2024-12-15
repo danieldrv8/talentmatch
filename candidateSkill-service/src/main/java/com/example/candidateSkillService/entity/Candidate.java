@@ -1,9 +1,9 @@
-package com.example.database_service.entity;
+package com.example.candidateSkillService.entity;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "candidates")
@@ -18,18 +18,18 @@ public class Candidate {
     private String email;
     @Column(nullable = false, unique = true)
     private String dasId;
-    @ManyToMany
-    private Set<Skill> skills = new HashSet<>();
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CandidateSkill> candidateSkills;
 
 
     public Candidate() {
     }
 
-    public Candidate(String candidateName, String email, String dasId, Set<Skill> skills) {
+    public Candidate(String candidateName, String email, String dasId, List<CandidateSkill> candidateSkills) {
         this.candidateName = candidateName;
         this.email = email;
         this.dasId = dasId;
-        this.skills = skills;
+        this.candidateSkills = candidateSkills;
     }
 
     public Long getId() {
@@ -61,19 +61,15 @@ public class Candidate {
         this.email = email;
     }
 
-    public Set<Skill> getSkills() {
-        return skills;
+    public List<CandidateSkill> getCandidateSkills() {
+        return candidateSkills;
     }
 
-    public void setSkills(Set<Skill> skills) {
-        this.skills = skills;
+    public void setCandidateSkills(List<CandidateSkill> candidateSkills) {
+        this.candidateSkills = candidateSkills;
     }
 
-    public Set<Long> getSkillIds() {
-        Set<Long> skillIds = new HashSet<>();
-        for (Skill skill : skills) {
-            skillIds.add(skill.getId());
-        }
-        return skillIds;
+    public List<CandidateSkill> getSkillIds() {
+        return this.candidateSkills;
     }
 }
