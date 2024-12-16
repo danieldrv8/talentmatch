@@ -19,7 +19,7 @@ public class Candidate {
     @Column(nullable = false, unique = true)
     private String dasId;
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CandidateSkill> candidateSkills;
+    private List<CandidateSkill> candidateSkills = new ArrayList<>();
 
 
     public Candidate() {

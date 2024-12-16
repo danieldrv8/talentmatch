@@ -1,5 +1,6 @@
 package com.example.candidateSkillService.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -8,7 +9,7 @@ public class CandidateDTO {
     private String candidateName;
     private String email;
     private String dasId;
-    private List<CandidateSkillDTO> candidateSkills;
+    private List<CandidateSkillDTO> candidateSkills = new ArrayList<>();
 
     public String getCandidateName() {
         return candidateName;

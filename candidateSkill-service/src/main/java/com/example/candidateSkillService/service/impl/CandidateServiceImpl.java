@@ -37,30 +37,23 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     public CandidateDTO createCandidate(CandidateDTO candidateDTO) {
-
         Candidate candidate = ConvertDTO.convertToCandidate(candidateDTO);
 
         List<CandidateSkill> candidateSkills = new ArrayList<>();
-        if (candidateDTO.getSkills() != null) {
-            for (CandidateSkillDTO candidateSkillDTO : candidateDTO.getSkills()) {
-                Skill skill = skillRepository.findById(candidateSkillDTO.getSkillId())
-                        .orElseThrow(() -> new EntityNotFoundException("Skill not found with id: " + candidateSkillDTO.getSkillId()));
+        for (CandidateSkillDTO candidateSkillDTO : candidateDTO.getSkills()) {
+            Skill skill = skillRepository.findById(candidateSkillDTO.getSkillId())
+                    .orElseThrow(() -> new EntityNotFoundException("Skill not found with id: " + candidateSkillDTO.getSkillId()));
 
-                CandidateSkill candidateSkill = ConvertDTO.convertToCandidateSkill(candidateSkillDTO, candidate, skill);
-                candidateSkills.add(candidateSkill);
-            }
+            CandidateSkill candidateSkill = ConvertDTO.convertToCandidateSkill(candidateSkillDTO, candidate, skill);
+            candidateSkills.add(candidateSkill);
         }
 
         candidate.setCandidateSkills(candidateSkills);
-        Candidate savedCandidate = candidateRepository.save(candidate); // Ensure cascade persist
+        Candidate savedCandidate = candidateRepository.save(candidate);
 
         return ConvertDTO.convertToCandidateDTO(savedCandidate);
-
-//        Candidate candidate = ConvertDTO.convertToCandidate(candidateDTO);
-//
-//        Candidate savedCandidate = candidateRepository.save(candidate);
-//        return ConvertDTO.convertToCandidateDTO(savedCandidate);
     }
+
 
     @Override
     public List<CandidateDTO> getAllCandidates() {

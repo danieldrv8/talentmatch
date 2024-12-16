@@ -2,8 +2,12 @@ package com.example.candidateSkillService.service.impl;
 
 import com.example.candidateSkillService.dto.CandidateDTO;
 import com.example.candidateSkillService.dto.CandidateSkillDTO;
+import com.example.candidateSkillService.entity.Candidate;
+import com.example.candidateSkillService.entity.CandidateSkill;
+import com.example.candidateSkillService.entity.Skill;
 import com.example.candidateSkillService.repository.CandidateSkillRespository;
 import com.example.candidateSkillService.service.CandidateSkillService;
+import com.example.candidateSkillService.utils.ConvertDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +20,9 @@ public class CandidateSkillServiceImpl implements CandidateSkillService {
     private CandidateSkillRespository candidateSkillRespository;
 
     @Override
-    public CandidateSkillDTO save(CandidateSkillDTO candidateSkill) {
-        return null;
+    public CandidateSkillDTO save(CandidateSkillDTO candidateSkillDTO, Candidate candidate, Skill skill) {
+        CandidateSkill candidateSkill = ConvertDTO.convertToCandidateSkill(candidateSkillDTO, candidate, skill);
+        return ConvertDTO.convertToCandidateSkillDTO(candidateSkillRespository.save(candidateSkill));
     }
 
     @Override

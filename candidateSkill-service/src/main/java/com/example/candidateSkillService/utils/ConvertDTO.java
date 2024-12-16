@@ -39,7 +39,17 @@ public class ConvertDTO {
         candidate.setCandidateName(candidateDTO.getCandidateName());
         candidate.setEmail(candidateDTO.getEmail());
         candidate.setDasId(candidateDTO.getDasId());
-        candidate.setCandidateSkills(candidateDTO.getSkills().stream().map(candidateSkillDTO -> ConvertDTO.convertToCandidateSkill(candidateSkillDTO, candidate, null)).collect(Collectors.toList()));
+        List<CandidateSkill> candidateSkills = new ArrayList<>();
+        for (CandidateSkillDTO candidateSkillDTO : candidateDTO.getSkills()) {
+            CandidateSkill candidateSkill = new CandidateSkill();
+            candidateSkill.setYearsOfExperience(candidateSkillDTO.getYearsOfExperience());
+            candidateSkill.setProficiency(candidateSkillDTO.getProficiency());
+            candidateSkill.setLastYearUsed(candidateSkillDTO.getLastYearUsed());
+            candidateSkill.setCandidate(candidate);  // Relación inversa
+            candidateSkills.add(candidateSkill);
+        }
+
+        candidate.setCandidateSkills(candidateSkills);
         return candidate;
     }
 
