@@ -88,13 +88,14 @@ public class CandidateServiceImpl implements CandidateService {
     @Override
     public CandidateDTO updateCandidate(Long id, CandidateDTO candidateDTO) {
         Candidate candidate = candidateRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Candidate not found"));
-        CandidateDTO candidateToUpdate = ConvertDTO.convertToCandidateDTO(candidate);
-        candidateToUpdate.setId(id);
-        candidateToUpdate.setCandidateName(candidateDTO.getCandidateName());
-        candidateToUpdate.setEmail(candidateDTO.getEmail());
-        candidateToUpdate.setDasId(candidateDTO.getDasId());
-        candidateToUpdate.setCandidateSkills(candidateDTO.getCandidateSkills());
-        return ConvertDTO.convertToCandidateDTO(candidateRepository.save(candidate));
+
+        if (candidate == null) {
+            throw new EntityNotFoundException("Candidate not found");
+        }
+
+        deleteCandidate(id);
+        candidateDTO.setId(id);
+        return createCandidate(candidateDTO);
     }
 
 }
