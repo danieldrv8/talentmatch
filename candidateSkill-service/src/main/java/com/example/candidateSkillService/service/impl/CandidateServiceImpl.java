@@ -98,4 +98,18 @@ public class CandidateServiceImpl implements CandidateService {
         return createCandidate(candidateDTO);
     }
 
+    @Override
+    public CandidateDTO getCandidateCS(Long id) {
+        Candidate candidate = candidateRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Candidate not found"));
+        CandidateDTO candidateDTO = ConvertDTO.convertToCandidateDTO(candidate);
+        List<CandidateSkillDTO> candidateSkills = new ArrayList<>();
+        for (CandidateSkill candidateSkill : candidate.getCandidateSkills()) {
+            candidateSkills.add(ConvertDTO.convertToCandidateSkillDTO(candidateSkill));
+        }
+        candidateDTO.setCandidateSkills(candidateSkills);
+
+        candidateDTO.setCandidateSkills(candidateSkills);
+        return candidateDTO;
+    }
+
 }

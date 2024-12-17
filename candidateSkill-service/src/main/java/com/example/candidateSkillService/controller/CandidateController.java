@@ -75,5 +75,12 @@ public class CandidateController {
         return ResponseEntity.ok(response);
     }
 
-
+    @GetMapping("/{id}/cs")
+    public ResponseEntity<Map<String, Object>> getCandidateCS(@PathVariable(value = "id") Long id) {
+        CandidateDTO candidateDTO = candidateService.getCandidateCS(id);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Candidate found");
+        response.put("candidate", candidateDTO);
+        return ResponseEntity.ok(response);
+    }
 }

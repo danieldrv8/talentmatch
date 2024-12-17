@@ -11,4 +11,5 @@ public interface CandidateService {
     List<CandidateResponseDTO> getAllCandidates();
     void deleteCandidate(Long id);
     CandidateDTO updateCandidate(Long id, CandidateDTO candidateDTO);
+    CandidateDTO getCandidateCS(Long id);
 }
