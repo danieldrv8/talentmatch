@@ -16,12 +16,11 @@ public class ConvertDTO {
 
     public static CandidateDTO convertToCandidateDTO(Candidate candidate) {
         CandidateDTO candidateDTO = new CandidateDTO();
-
         candidateDTO.setId(candidate.getId());
         candidateDTO.setCandidateName(candidate.getCandidateName());
         candidateDTO.setEmail(candidate.getEmail());
         candidateDTO.setDasId(candidate.getDasId());
-        candidateDTO.setSkills(candidate.getCandidateSkills().stream().map(candidateSkill -> ConvertDTO.convertToCandidateSkillDTO(candidateSkill)).collect(Collectors.toList()));
+        candidateDTO.setCandidateSkills(candidate.getCandidateSkills().stream().map(ConvertDTO::convertToCandidateSkillDTO).collect(Collectors.toList()));
         //candidateDTO.setSkills(candidate.getCandidateSkills().stream().map(candidateSkill -> ConvertDTO.convertToCandidateSkillDTO(candidateSkill)).collect(Collectors.toList()));
         return candidateDTO;
     }
@@ -40,7 +39,7 @@ public class ConvertDTO {
         candidate.setEmail(candidateDTO.getEmail());
         candidate.setDasId(candidateDTO.getDasId());
         List<CandidateSkill> candidateSkills = new ArrayList<>();
-        for (CandidateSkillDTO candidateSkillDTO : candidateDTO.getSkills()) {
+        for (CandidateSkillDTO candidateSkillDTO : candidateDTO.getCandidateSkills()) {
             CandidateSkill candidateSkill = new CandidateSkill();
             candidateSkill.setYearsOfExperience(candidateSkillDTO.getYearsOfExperience());
             candidateSkill.setProficiency(candidateSkillDTO.getProficiency());
@@ -80,6 +79,15 @@ public class ConvertDTO {
         candidateSkillDTO.setProficiency(candidateSkill.getProficiency());
         candidateSkillDTO.setLastYearUsed(candidateSkill.getLastYearUsed());
         return candidateSkillDTO;
+    }
+
+    public static CandidateResponseDTO candidateResponseDTO(Candidate candidate) {
+        CandidateResponseDTO candidateResponseDTO = new CandidateResponseDTO();
+        candidateResponseDTO.setId(candidate.getId());
+        candidateResponseDTO.setCandidateName(candidate.getCandidateName());
+        candidateResponseDTO.setEmail(candidate.getEmail());
+        candidateResponseDTO.setDasId(candidate.getDasId());
+        return candidateResponseDTO;
     }
 
 

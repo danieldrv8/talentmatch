@@ -27,7 +27,7 @@ public class SkillController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> getSkillById(@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> getSkillById(@PathVariable("id") Long id) {
         SkillDTO skillDTO = skillService.getSkillById(id);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Skill found");

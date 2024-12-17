@@ -1,5 +1,6 @@
 package com.example.candidateSkillService.service.impl;
 import com.example.candidateSkillService.dto.CandidateDTO;
+import com.example.candidateSkillService.dto.CandidateResponseDTO;
 import com.example.candidateSkillService.dto.CandidateSkillDTO;
 import com.example.candidateSkillService.dto.SkillDTO;
 import com.example.candidateSkillService.entity.Candidate;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CandidateServiceImpl implements CandidateService {
@@ -30,9 +32,11 @@ public class CandidateServiceImpl implements CandidateService {
     private SkillRepository skillRepository;
 
     @Override
-    public CandidateDTO getCandidateById(Long id) {
+    public CandidateResponseDTO getCandidateById(Long id) {
         Candidate candidate = candidateRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Candidate not found"));
-        return ConvertDTO.convertToCandidateDTO(candidate);
+        CandidateResponseDTO candidateResponseDTO = ConvertDTO.candidateResponseDTO(candidate);
+        candidateResponseDTO.setSkills(skillRepository.findById(candidate.getId()).stream().map(ConvertDTO::convertToSkillDTO).collect(Collectors.toSet()));
+        return candidateResponseDTO;
     }
 
     @Override
@@ -40,7 +44,7 @@ public class CandidateServiceImpl implements CandidateService {
         Candidate candidate = ConvertDTO.convertToCandidate(candidateDTO);
 
         List<CandidateSkill> candidateSkills = new ArrayList<>();
-        for (CandidateSkillDTO candidateSkillDTO : candidateDTO.getSkills()) {
+        for (CandidateSkillDTO candidateSkillDTO : candidateDTO.getCandidateSkills()) {
             Skill skill = skillRepository.findById(candidateSkillDTO.getSkillId())
                     .orElseThrow(() -> new EntityNotFoundException("Skill not found with id: " + candidateSkillDTO.getSkillId()));
 
@@ -56,8 +60,14 @@ public class CandidateServiceImpl implements CandidateService {
 
 
     @Override
-    public List<CandidateDTO> getAllCandidates() {
-        return candidateRepository.findAll().stream().map(candidate -> ConvertDTO.convertToCandidateDTO(candidate)).toList();
+    public List<CandidateResponseDTO> getAllCandidates() {
+        List<CandidateResponseDTO> candidates = new ArrayList<>();
+        for (Candidate candidate : candidateRepository.findAll()) {
+            CandidateResponseDTO candidateResponseDTO = ConvertDTO.candidateResponseDTO(candidate);
+            candidateResponseDTO.setSkills(skillRepository.findById(candidate.getId()).stream().map(ConvertDTO::convertToSkillDTO).collect(Collectors.toSet()));
+            candidates.add(candidateResponseDTO);
+        }
+        return candidates;
     }
 
     @Override
@@ -73,7 +83,7 @@ public class CandidateServiceImpl implements CandidateService {
         candidateToUpdate.setCandidateName(candidateDTO.getCandidateName());
         candidateToUpdate.setEmail(candidateDTO.getEmail());
         candidateToUpdate.setDasId(candidateDTO.getDasId());
-        candidateToUpdate.setSkills(candidateDTO.getSkills());
+        candidateToUpdate.setCandidateSkills(candidateDTO.getCandidateSkills());
         return ConvertDTO.convertToCandidateDTO(candidateRepository.save(candidate));
     }
 

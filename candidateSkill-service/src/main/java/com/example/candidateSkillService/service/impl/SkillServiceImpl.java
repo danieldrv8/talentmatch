@@ -5,6 +5,7 @@ import com.example.candidateSkillService.entity.Skill;
 import com.example.candidateSkillService.repository.SkillRepository;
 import com.example.candidateSkillService.service.SkillService;
 import com.example.candidateSkillService.utils.ConvertDTO;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,9 @@ public class SkillServiceImpl implements SkillService {
     @Override
     public SkillDTO getSkillById(Long id) {
         Skill skill = skillRepository.findById(id).orElse(null);
+        if (skill == null) {
+            throw new EntityNotFoundException("No se encuentra el skill con id " + id);
+        }
         return ConvertDTO.convertToSkillDTO(skill);
     }
 

@@ -24,7 +24,7 @@ public class CandidateController {
 
     @GetMapping
     public ResponseEntity<Map<String, Object>> getAllCandidates() {
-        List<CandidateDTO> candidates = candidateService.getAllCandidates();
+        List<CandidateResponseDTO> candidates = candidateService.getAllCandidates();
         Map<String, Object> response = new HashMap<>();
         response.put("message", "List of all candidates");
         response.put("candidates", candidates);
@@ -33,19 +33,19 @@ public class CandidateController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> getCandidateById(@PathVariable(value = "id") Long id) {
-        CandidateDTO candidateDTO = candidateService.getCandidateById(id);
+        CandidateResponseDTO candidateResponseDTO = candidateService.getCandidateById(id);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Candidate found");
-        response.put("candidate", candidateDTO);
+        response.put("candidate", candidateResponseDTO);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}/skills")
     public ResponseEntity<Map<String, Object>> getCandidateSkillsById(@PathVariable(value = "id") Long id) {
-        CandidateDTO candidateDTO = candidateService.getCandidateById(id);
+        CandidateResponseDTO candidateResponseDTO = candidateService.getCandidateById(id);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Skills of the candidate found");
-        response.put("skills", candidateDTO.getSkills());
+        response.put("skills", candidateResponseDTO.getSkills());
         return ResponseEntity.ok(response);
     }
 
@@ -54,6 +54,7 @@ public class CandidateController {
         candidateService.createCandidate(candidateDTO);
         HashMap<String, Object> response = new HashMap<>();
         response.put("message", "Candidate created successfully");
+        response.put("candidate", candidateDTO);
         return ResponseEntity.ok(response);
     }
 

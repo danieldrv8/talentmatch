@@ -1,6 +1,7 @@
 package com.example.candidateSkillService.dto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -43,11 +44,11 @@ public class CandidateDTO {
         this.id = id;
     }
 
-    public List<CandidateSkillDTO> getSkills() {
+    public List<CandidateSkillDTO> getCandidateSkills() {
         return candidateSkills;
     }
 
-    public void setSkills(List<CandidateSkillDTO> skills) {
-        this.candidateSkills = skills;
+    public void setCandidateSkills(List<CandidateSkillDTO> candidateSkills) {
+        this.candidateSkills = candidateSkills;
     }
 }
