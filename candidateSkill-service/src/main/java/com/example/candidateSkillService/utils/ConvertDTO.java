@@ -20,7 +20,7 @@ public class ConvertDTO {
         candidateDTO.setCandidateName(candidate.getCandidateName());
         candidateDTO.setEmail(candidate.getEmail());
         candidateDTO.setDasId(candidate.getDasId());
-        candidateDTO.setCandidateSkills(candidate.getCandidateSkills().stream().map(ConvertDTO::convertToCandidateSkillDTO).collect(Collectors.toList()));
+        //candidateDTO.setCandidateSkills(candidate.getCandidateSkills().stream().map(ConvertDTO::convertToCandidateSkillDTO).collect(Collectors.toList()));
         //candidateDTO.setSkills(candidate.getCandidateSkills().stream().map(candidateSkill -> ConvertDTO.convertToCandidateSkillDTO(candidateSkill)).collect(Collectors.toList()));
         return candidateDTO;
     }
@@ -38,7 +38,7 @@ public class ConvertDTO {
         candidate.setCandidateName(candidateDTO.getCandidateName());
         candidate.setEmail(candidateDTO.getEmail());
         candidate.setDasId(candidateDTO.getDasId());
-        List<CandidateSkill> candidateSkills = new ArrayList<>();
+        /*List<CandidateSkill> candidateSkills = new ArrayList<>();
         for (CandidateSkillDTO candidateSkillDTO : candidateDTO.getCandidateSkills()) {
             CandidateSkill candidateSkill = new CandidateSkill();
             candidateSkill.setYearsOfExperience(candidateSkillDTO.getYearsOfExperience());
@@ -49,6 +49,8 @@ public class ConvertDTO {
         }
 
         candidate.setCandidateSkills(candidateSkills);
+
+         */
         return candidate;
     }
 

@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,7 +37,11 @@ public class CandidateServiceImpl implements CandidateService {
     public CandidateResponseDTO getCandidateById(Long id) {
         Candidate candidate = candidateRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Candidate not found"));
         CandidateResponseDTO candidateResponseDTO = ConvertDTO.candidateResponseDTO(candidate);
-        candidateResponseDTO.setSkills(skillRepository.findById(candidate.getId()).stream().map(ConvertDTO::convertToSkillDTO).collect(Collectors.toSet()));
+        Set<SkillDTO> skills = new HashSet<>();
+        for (CandidateSkill candidateSkill : candidate.getCandidateSkills()) {
+            skills.add(ConvertDTO.convertToSkillDTO(skillRepository.findById(candidateSkill.getSkill().getId()).orElseThrow(() -> new EntityNotFoundException("Skill not found"))));
+        }
+        candidateResponseDTO.setSkills(skills);
         return candidateResponseDTO;
     }
 
@@ -64,8 +70,12 @@ public class CandidateServiceImpl implements CandidateService {
         List<CandidateResponseDTO> candidates = new ArrayList<>();
         for (Candidate candidate : candidateRepository.findAll()) {
             CandidateResponseDTO candidateResponseDTO = ConvertDTO.candidateResponseDTO(candidate);
-            candidateResponseDTO.setSkills(skillRepository.findById(candidate.getId()).stream().map(ConvertDTO::convertToSkillDTO).collect(Collectors.toSet()));
             candidates.add(candidateResponseDTO);
+            Set<SkillDTO> skills = new HashSet<>();
+            for (CandidateSkill candidateSkill : candidate.getCandidateSkills()) {
+                skills.add(ConvertDTO.convertToSkillDTO(skillRepository.findById(candidateSkill.getSkill().getId()).orElseThrow(() -> new EntityNotFoundException("Skill not found"))));
+            }
+            candidateResponseDTO.setSkills(skills);
         }
         return candidates;
     }
