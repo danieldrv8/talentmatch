@@ -10,4 +10,5 @@ public interface SkillService {
     List<SkillDTO> getAllSkills();
     void deleteSkill(Long id);
     SkillDTO updateSkill(Long id, SkillDTO skillDTO);
+    SkillDTO getSkillByName(String name);
 }

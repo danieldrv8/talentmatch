@@ -35,6 +35,15 @@ public class SkillController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Map<String, Object>> getSkillByName(@PathVariable("name") String name) {
+        SkillDTO skillDTO = skillService.getSkillByName(name);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Skill found");
+        response.put("skill", skillDTO);
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
     public ResponseEntity<Map<String, Object>> createSkill(@RequestBody SkillDTO skillDTO) {
         skillService.createSkill(skillDTO);

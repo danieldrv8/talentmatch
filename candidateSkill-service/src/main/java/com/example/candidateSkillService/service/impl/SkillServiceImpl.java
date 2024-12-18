@@ -54,4 +54,20 @@ public class SkillServiceImpl implements SkillService {
         skillToUpdate.setSkillName(skillDTO.getSkillName());
         return ConvertDTO.convertToSkillDTO(skillRepository.save(skill));
     }
+
+    @Override
+    public SkillDTO getSkillByName(String name) {
+        List<Skill> skills = skillRepository.findAll();
+        Skill skill = new Skill();
+        if (skills.isEmpty()) {
+            return null;
+        }
+        for (Skill s : skills) {
+            if (s.getSkillName().equals(name)) {
+                skill = s;
+                break;
+            }
+        }
+        return ConvertDTO.convertToSkillDTO(skill);
+    }
 }
