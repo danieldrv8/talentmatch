@@ -8,12 +8,16 @@ services:
       - app-network
 
   api-gateway:
-    image: danieldrv/talentmatch-api-gateway:1.1
+    image: danieldrv/talentmatch-api-gateway:latest
+  #  build:
+   #   context: .
+    #  dockerfile: ./api-gateway/Dockerfile
     ports:
       - "8080:8080"
     depends_on:
       - user-service
       - candidate-skill-service
+      - projects
       - mysql-container
     networks:
       - app-network
@@ -29,12 +33,25 @@ services:
     restart: unless-stopped
 
   candidate-skill-service:
-    #image: danieldrv/talentmatch-candidate-skill:latest
-    build:
-      context: .
-      dockerfile: ./candidateSkill-service/Dockerfile
+    image: danieldrv/talentmatch-candidate-skill:latest
+ #   build:
+  #    context: .
+   #   dockerfile: ./candidateSkill-service/Dockerfile
     ports:
       - "8081:8081"
+    depends_on:
+      - mysql-container
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  projects:
+    image: danieldrv/talentmatch-projects:latest
+   # build:
+    #  context: .
+     # dockerfile: ./projects/Dockerfile
+    ports:
+      - "8083:8083"
     depends_on:
       - mysql-container
     networks:
