@@ -63,7 +63,7 @@ public class SkillController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> deleteSkill(@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> deleteSkill(@PathVariable("id") Long id) {
         skillService.deleteSkill(id);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Skill deleted");
