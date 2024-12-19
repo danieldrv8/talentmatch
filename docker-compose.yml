@@ -33,7 +33,7 @@ services:
     restart: unless-stopped
 
   candidate-skill-service:
-    image: danieldrv/talentmatch-candidate-skill:latest
+    image: danieldrv/talentmatch-candidate-skill-service:latest
  #   build:
   #    context: .
    #   dockerfile: ./candidateSkill-service/Dockerfile
@@ -46,10 +46,10 @@ services:
     restart: unless-stopped
 
   projects:
-    image: danieldrv/talentmatch-projects:latest
-   # build:
-    #  context: .
-     # dockerfile: ./projects/Dockerfile
+  #  image: danieldrv/talentmatch-projects:latest
+    build:
+      context: .
+      dockerfile: ./projects/Dockerfile
     ports:
       - "8083:8083"
     depends_on:

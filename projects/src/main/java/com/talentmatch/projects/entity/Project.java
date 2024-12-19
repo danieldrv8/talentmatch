@@ -14,17 +14,17 @@ public class Project {
     @Column(nullable = false)
     private String projectName;
     @Column
-    private List<Integer> skillIds;
+    private List<Long> skillIds;
     @Column
-    private List<String> dasIds;
+    private List<Long> candidateIds;
 
     public Project() {
     }
 
-    public Project(String projectName, List<Integer> skillIds, List<String> dasIds) {
+    public Project(String projectName, List<Long> skillIds, List<Long> candidateIds) {
         this.projectName = projectName;
         this.skillIds = skillIds;
-        this.dasIds = dasIds;
+        this.candidateIds = candidateIds;
     }
 
     public Long getId() {
@@ -43,19 +43,19 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public List<Integer> getSkillIds() {
+    public List<Long> getSkillIds() {
         return skillIds;
     }
 
-    public void setSkillIds(List<Integer> skillIds) {
+    public void setSkillIds(List<Long> skillIds) {
         this.skillIds = skillIds;
     }
 
-    public List<String> getDasIds() {
-        return dasIds;
+    public List<Long> getCandidateIds() {
+        return candidateIds;
     }
 
-    public void setDasIds(List<String> dasIds) {
-        this.dasIds = dasIds;
+    public void setCandidateIds(List<Long> candidateIds) {
+        this.candidateIds = candidateIds;
     }
 }

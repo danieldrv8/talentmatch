@@ -31,7 +31,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project updateProject(Long id, Project project) {
-        return null;
+        deleteProject(id);
+        return projectRepository.save(project);
     }
 
     @Override
